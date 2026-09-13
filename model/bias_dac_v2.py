@@ -52,7 +52,7 @@ class DACParams:
     sigma_u: float = 0.003      # [Paper Sec. IV-C] sigma0 = 0.003 C0 (inferred by the paper)
     seed: int = 0
     # --- parasitic / region gain --------------------------------------------
-    enable_parasitic: bool = False
+    enable_parasitic: bool = True
     alpha: float = 0.064        # [Paper-read Fig. 9(a)] ~8 mV jump / 125 mV span
     reset_to: str = "vl"        # "vl": top plate reset to VL (region start pinned) | "gnd"
     # --- gain / offset (global, behavioral) ----------------------------------
