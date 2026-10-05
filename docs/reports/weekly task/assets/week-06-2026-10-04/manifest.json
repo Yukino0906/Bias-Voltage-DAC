@@ -1,0 +1,68 @@
+[
+  {
+    "file": "01_tg_ron_testbench.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-722bc31c-3b54-4664-84cf-ce1632f3bdc7.png",
+    "sha256": "fcb411d89bdcb5405c4a73895c900b78fc0867ca877d8a5b0c4b0b0ce67830ee",
+    "description": "Standalone TG testbench; final 1 mV offset confirmed by later run, not visible in this earlier screenshot."
+  },
+  {
+    "file": "02_tg_dc_current.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-761f469c-d5dd-409f-a038-3758191c6119.png",
+    "sha256": "e7156f18c3cb179731e0b6633c05744bdbb8a1266ae0e069237450a16b4c65f7",
+    "description": "DC current with marker at vtest 0.51 V."
+  },
+  {
+    "file": "03_tg_ron_curve.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-a7914f69-6d6d-4898-a786-3296d4deb9e4.png",
+    "sha256": "f6d26f6a3fa2eb8cd432fde0b1217a2565bc214c592d875b9dd7e097ab36786b",
+    "description": "Ron expression and current on separate axes."
+  },
+  {
+    "file": "04_b2_transition.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-1727b8c9-484c-4cf1-bfb3-6fca292aa741.png",
+    "sha256": "82775568e90ca2f408bebc8e664417558e73af2077b3e56b268cef9c0f7f13cf",
+    "description": "b2-only TG code 100 transition."
+  },
+  {
+    "file": "05_b2_turnoff_zoom.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-9b80ef87-d14a-4801-98e7-6f46debd450d.png",
+    "sha256": "4e201c546f362a8446c292461d117415c4b379392f94a46f9e4042c55992fbc1",
+    "description": "b2 turn-off disturbance on microvolt scale."
+  },
+  {
+    "file": "06_six_tg_schematic.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-8b49552e-52c5-48c3-a4a4-39a36c1974da.png",
+    "sha256": "c8e8131c21cc1e674e6ea8164595e6340849e4277fbad61e66adb7227e7524d4",
+    "description": "Six TG reference switches before supply-pin cleanup."
+  },
+  {
+    "file": "07_shared_supply_schematic.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-4b4fafb7-8219-4c97-a6e4-b1c7bf4dcf14.png",
+    "sha256": "9e963659617e92e1d5d2fd944243387e47fb36d769b28484314ff7311636274c",
+    "description": "Six TG reference switches with shared VDD and VSS nets."
+  },
+  {
+    "file": "08_code100_regression.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-c9342867-2607-40c2-adff-b1d4b8334053.png",
+    "sha256": "ddf9f9b836712767bb3497e97a88cb3a0d372045bc2d10c61604b1697c3d8e26",
+    "description": "Six-TG code 100 regression, 499.995 mV."
+  },
+  {
+    "file": "09_veriloga_testbench.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-72b5631e-f3fc-44ea-b193-54294b91688d.png",
+    "sha256": "a617b542a79acf58081e04879d578a1038bc905f216e82c7a5d2ab853c6483dd",
+    "description": "Verilog-A driver connected to transistor-level CDAC."
+  },
+  {
+    "file": "10_code001_to_100.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-4ab91540-cd08-4678-b278-720a6d7dcbdf.png",
+    "sha256": "1e19b66d4515063b6324b582749ef65223d40b21aafe632eaef2f89ad64f032b",
+    "description": "Verilog-A two-code test with plateau markers."
+  },
+  {
+    "file": "11_full_code_scan.png",
+    "source": "C:\\Users\\hn245\\AppData\\Local\\Temp\\codex-clipboard-eeb4b0fa-f554-42fb-ba6f-a0e7fe5ef9d3.png",
+    "sha256": "053b06ac08a0712d850492a4f97cd037f7b4535740323ce9e2787bdcc12a12d1",
+    "description": "Ascending full-code scan with all eight plateau markers."
+  }
+]

@@ -1,0 +1,19 @@
+Paper download status - October 4, 2026
+All three requested full texts RECEIVED AND REVIEWED. No outstanding requests from this list.
+
+[R03] SiGe Qubit Biasing with a Cryogenic CMOS DAC at mK Temperature
+DOI: 10.1109/ESSCIRC59616.2023.10268801
+Local file: papers/SiGe_Qubit_Biasing_with_a_Cryogenic_CMOS_DAC_at_mK_Temperature.pdf
+Read: Sections II-III; Table I; Figure 3 (PDF pp. 2-3)
+
+[R15] Cryogenic Current Steering DAC With Mitigated Variability
+DOI: 10.1109/LSSC.2020.3013443
+Local file: papers/ESSCIRC_DAC_paper-revised.pdf
+Read: Sections III-V; Figures 7-9; Table I (author manuscript pp. 3-4)
+
+[R24J] Xiling: Cryo-CMOS Manipulator Using Dual 18-bit R-2R DACs for Single-Electron Transistor at 60 mK
+DOI: 10.1109/JSSC.2026.3671795
+Local file: papers/Xiling_Cryo-CMOS_Manipulator_Using_Dual_18-bit_R-2R_DACs_for_Single-Electron_Transistor_at_60_mK.pdf
+Read: Section V; Figures 20-25; Table I (PDF pp. 9-12)
+
+The revised specification includes these measurements and their limitations.

@@ -1,0 +1,56 @@
+Paper download requests for the Bias Voltage DAC
+October 4, 2026
+Save PDFs in docs/specs/papers. Full texts below are pending; no unverified detailed metrics were used.
+
+Priority 1
+SiGe Qubit Biasing with a Cryogenic CMOS DAC at mK Temperature
+L. Schreckenberg et al., ESSCIRC 2023, pp. 161-164
+DOI: 10.1109/ESSCIRC59616.2023.10268801
+https://doi.org/10.1109/ESSCIRC59616.2023.10268801
+Purpose: Confirm actual voltage window, drift conditions, local temperature and projected versus measured power.
+
+Priority 1
+Xiling: Cryo-CMOS Manipulator Using Dual 18-bit R-2R DACs for Single-Electron Transistor at 60 mK
+Y. Li et al., IEEE JSSC, 2026
+DOI: 10.1109/JSSC.2026.3671795
+https://doi.org/10.1109/JSSC.2026.3671795
+Purpose: Check full noise bandwidth, calibration, load and measured RT-to-cold trends. Alternative: ISSCC 2025 DOI 10.1109/ISSCC49661.2025.10904579.
+
+Priority 2
+Cryogenic Current Steering DAC With Mitigated Variability
+M. E. P. V. Zurita et al., IEEE SSC-L, vol. 3, pp. 254-257, 2020
+DOI: 10.1109/LSSC.2020.3013443
+https://doi.org/10.1109/LSSC.2020.3013443
+Purpose: Separate measured and expected performance; compare narrow-range fine biasing with this 1 V-span CDAC.
+
+Already available open full texts used in the revised specification:
+
+[R01] Bias Voltage DAC Operating at Cryogenic Temperatures for Solid-State Qubit Applications
+DOI: 10.1109/LSSC.2020.3011576
+Open full text: https://juser.fz-juelich.de/record/888069/files/FINAL%20VERSION_QC.pdf
+
+[R09] An 11-bit 0.008 mm2 charge-redistribution digital-to-analog converter operating at cryogenic temperature for large-scale qubit arrays
+DOI: 10.1587/elex.19.20220099
+Open full text: https://da.lib.kobe-u.ac.jp/da/kernel/90009517/90009517.pdf
+
+[R04] A 3V 15b 157uW Cryo-CMOS DAC for Multiplexed Spin-Qubit Biasing
+DOI: 10.1109/VLSITechnologyandCir46769.2022.9830309
+Open full text: https://pure.tudelft.nl/ws/portalfiles/portal/154843798/A_3V_15b_157W_Cryo_CMOS_DAC_for_Multiplexed_Spin_Qubit_Biasing.pdf
+
+[R02] Qubit Bias using a CMOS DAC at mK Temperatures
+DOI: 10.1109/ICECS202256217.2022.9971043
+Open full text: https://confcats-event-sessions.s3.amazonaws.com/icecs22/papers/6353.pdf
+
+[R10] Characterization and Analysis of On-Chip Microwave Passive Components at Cryogenic Temperatures
+DOI: 10.1109/JEDS.2020.2986722
+Open full text: https://repository.tudelft.nl/file/File_6d4cc63f-f0aa-4ad1-8d39-9942b3c07726
+
+[R11] Characterization and Modeling of Mismatch in Cryo-CMOS
+DOI: 10.1109/JEDS.2020.2976546
+Open full text: https://pure.tudelft.nl/ws/portalfiles/portal/71537207/09015956.pdf
+
+[R18] Cryo-CMOS Voltage References for the Ultrawide Temperature Range From 300 K Down to 4.2 K
+DOI: 10.1109/JSSC.2024.3378768
+Open full text: https://pure.tudelft.nl/ws/portalfiles/portal/230892395/Cryo-CMOS_Voltage_References_for_the_Ultrawide_Temperature_Range_From_300_K_Down_to_4.2_K.pdf
+
+Complete 24-record bibliography: docs/cryogenic_bias_dac_literature_review_2026-10-04.md
