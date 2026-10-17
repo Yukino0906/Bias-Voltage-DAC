@@ -1,0 +1,115 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+module cdac_code_driver(
+    en_l0, en_l0_b, en_l1, en_l1_b, en_l2, en_l2_b,
+    en_u0, en_u0_b, en_u1, en_u1_b, en_u2, en_u2_b,
+    rst, vss
+);
+
+output en_l0, en_l0_b, en_l1, en_l1_b, en_l2, en_l2_b;
+output en_u0, en_u0_b, en_u1, en_u1_b, en_u2, en_u2_b;
+output rst;
+inout vss;
+
+electrical en_l0, en_l0_b, en_l1, en_l1_b, en_l2, en_l2_b;
+electrical en_u0, en_u0_b, en_u1, en_u1_b, en_u2, en_u2_b;
+electrical rst, vss;
+
+// Logic amplitude relative to vss.
+parameter real vlogic = 1.0 from (0:inf);
+
+// Timing.
+parameter real t_reset = 20n from (0:inf);
+parameter real t_apply = 30n from (0:inf);
+parameter real t_step  = 40n from (0:inf);
+parameter real t_dead  = 5n  from (0:inf);
+parameter real t_edge  = 1n  from (0:inf);
+
+integer lower_on;
+integer upper_on;
+integer reset_on;
+integer current_code;
+integer next_code;
+integer changed;
+
+analog begin
+
+    // Start at 000 with reset active.
+    @(initial_step) begin
+        lower_on    = 7;
+        upper_on    = 0;
+        reset_on    = 1;
+        current_code = 0;
+        next_code    = 0;
+        changed      = 0;
+
+        if ((t_apply <= t_reset + t_edge) ||
+            (t_dead <= t_edge) ||
+            (t_step <= t_dead + t_edge)) begin
+            $strobe("ERROR: Require t_apply > t_reset + t_edge, t_dead > t_edge, and t_step > t_dead + t_edge.");
+            $finish;
+        end
+    end
+
+    // Release reset once.
+    @(timer(t_reset)) begin
+        reset_on = 0;
+    end
+
+    // Break: disconnect old paths for bits that will change.
+    @(timer(t_apply, t_step)) begin
+        if (next_code <= 7) begin
+            changed  = current_code ^ next_code;
+            lower_on = lower_on & (7 ^ changed);
+            upper_on = upper_on & (7 ^ changed);
+        end
+    end
+
+    // Make: apply the next code after the dead time.
+    @(timer(t_apply + t_dead, t_step)) begin
+        if (next_code <= 7) begin
+            lower_on     = 7 ^ next_code;
+            upper_on     = next_code;
+            current_code = next_code;
+            next_code    = next_code + 1;
+        end
+    end
+
+    // Lower-reference TG controls.
+    V(en_l0, vss) <+ transition(
+        (lower_on & 1) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+    V(en_l0_b, vss) <+ transition(
+        (lower_on & 1) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+    V(en_l1, vss) <+ transition(
+        (lower_on & 2) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+    V(en_l1_b, vss) <+ transition(
+        (lower_on & 2) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+    V(en_l2, vss) <+ transition(
+        (lower_on & 4) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+    V(en_l2_b, vss) <+ transition(
+        (lower_on & 4) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+    // Upper-reference TG controls.
+    V(en_u0, vss) <+ transition(
+        (upper_on & 1) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+    V(en_u0_b, vss) <+ transition(
+        (upper_on & 1) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+    V(en_u1, vss) <+ transition(
+        (upper_on & 2) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+    V(en_u1_b, vss) <+ transition(
+        (upper_on & 2) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+    V(en_u2, vss) <+ transition(
+        (upper_on & 4) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+    V(en_u2_b, vss) <+ transition(
+        (upper_on & 4) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+    V(rst, vss) <+ transition(
+        reset_on ? vlogic : 0.0, 0.0, t_edge, t_edge);
+
+end
+endmodule
