@@ -1,12 +1,53 @@
 # Bias DAC Current Project State
 
-Updated October 17, 2026, at Week 8 closeout. Read this file first, then the [Week 8 experiment log](experiments/week-08-2026-10-17.md). The closeout below supersedes earlier plans and intermediate readings.
+## November 8 — segmented DAC session
+
+The latest user direction is to build and simulate the 3-bit 2+1 segmented CDAC today. Resume application research next week. The [Week 11 log](experiments/week-11-2026-11-08.md) records unit wiring and prioritized matched binary, thermometer and segmented runs. The [local driver source](experiments/code/cdac_seg21_driver.va) is prepared. Actual OA construction and Spectre runs remain pending. First GUI step: copy cdac_unit_tg_n65 to cdac_unit_2cu_tg_n65 and parallel a second Cu on the shared two-TG branch.
+
+## November 8 — Week 11 application study
+
+The mentor requested an application and its electrical requirements before choosing segmentation. The user selected quantum-dot gate biasing for research. A partner load is still open. The [Week 11 experiment log](experiments/week-11-2026-11-08.md) records four primary sources, a proposed two-gate DC bias interface, a standalone sample-and-hold bench, and a three-hour work plan. First proposed experiment: hold gate A while updating B, compare the disturbance with a quiet hold, and measure acquisition, switch-opening error and drift separately. The design and load assumptions await confirmation. No Week 11 Cadence results have been reported. The matched eight-code MOS-reset comparison remains pending.
+
+## November 1 — current thermometer implementation and reporting
+
+This update supersedes the earlier planning-only/unbuilt thermometer status below. See the [Week 10 experiment log](experiments/week-10-2026-11-01.md). The user confirmed the completed upper schematic is correct and requested that the overview and descended unit schematic be included in the weekly report. The unit contains one cap_unit_n65 and two tg_n65 instances; the upper array has seven units, one dummy capacitor and an NMOS reset. The intended array has fourteen TGs and 34 external pins. The user copied the upper design from 2k8lab into bias_voltage_dac; full hierarchical binding/netlist verification remains pending.
+
+The user explicitly ended this week on November 1 and requested the final report and static comparison. The final ten-page [Week 10 Word report](reports/weekly%20task/BiasDAC_WeeklyTask_Week10_2026-11-01.docx) and [matching PDF](reports/weekly%20task/BiasDAC_WeeklyTask_Week10_2026-11-01.pdf) now include seven original figures, all seven nonzero-code readings and the available binary MOS-reset comparison. All pages were visually reviewed and body/table text matched the exported PDF. This supersedes the earlier Word-only progress snapshot. Week 10 is closed; future interim reports remain Word-only until their weekly closeout. No report was submitted or sent.
+
+The 34-pin array and regenerated 30-pin driver symbol are assembled; the user reports no remaining port mismatch. The wired testbench has now produced its first 0–400 ns thermometer waveform. The user explicitly confirmed only TT_27 enabled (tt_lib, 27 C), reset NMOS W=0.5 um/L=60 nm. Seven plateau samples for codes 1–7 are 124.7434, 249.6993, 374.6469, 499.5946, 624.5478, 749.4997 and 874.4462 mV; measured-minus-ideal errors are -256.6 to -553.8 uV. The prominent binary carry dip is not visible at the full-plot scale; no zero-glitch or precise settling claim is supported. New code 4/7 readings are 8.6/12.5 uV below the earlier half-width binary MOS-reset readings, at different sample times, so an accuracy penalty is not yet established. The final 185-205 ns zoom (350-550 mV axis) shows no visible undershoot or overshoot in the 3-to-4 transition. Markers: 374.7577 mV at 193.0839 ns and 499.594 mV at 198.6432 ns. Code 3 differs by +110.8 uV from its earlier sample, so retain time-dependent sampling as an unresolved issue rather than claiming steady-state or a hold-drift rate. Next session: obtain code-zero and matched-time plateau readings, verify effective netlist/numerical settings, and quantify residual glitch/settling. Reverse transitions, long hold and thermometer temperature corners remain incomplete. TG OFF-current numerical checks remain deferred.
+
+The user subsequently confirmed that the supplied Oct 4 eight-code screenshot uses ideal reset and requested removal of that comparison. The extra page was removed from both Word and PDF by restoring the identical, previously verified ten-page report. The ideal-versus-MOS differences are withdrawn from the weekly comparison; the existing confirmed MOS-reset code-4/code-7 comparison is retained. No reset-identity ambiguity remains for that screenshot.
+
+Historical report audit on November 1 confirmed that the full eight-code table in Week 7/Sprint 3 uses ideal reset. Week 8 page 3 and Sprint 4 page 4 provide W=0.5 um binary MOS-reset markers only for codes 0, 4 and 7; other code-7 temperature/reset readings do not add code coverage. The current two-code thermometer comparison remains unchanged; see the Week 10 log for source details.
+
+## Week 11 planned work
+
+- [ ] Obtain the binary MOS-reset outputs for all eight codes and compare with the thermometer MOS-reset array under matched conditions: tt_lib, 27 C, VDD/Vu=1 V, Vl/VSS=0 V, reset W=0.5 um/L=60 nm, same load, stimulus timing and effective numerical settings.
+- [ ] Verify the generated netlists use physical MOS reset in both designs. Sample both arrays at the same delay after each make event, including code zero; retain timestamps and export raw values. Calculate thermometer-minus-binary and errors versus ideal target voltages. Do not substitute the historical ideal-reset run.
+
+This is a deferred Week 11 task, not a completed comparison or a new simulation. Week 10 remains closed.
+
+## October 25 reporting update
+
+Sprint 4 is prepared in English as a six-page [Word report](reports/sprint/sprint-04-2026-10-25.docx) and [matching PDF](reports/sprint/sprint-04-2026-10-25.pdf), covering recorded October 17 and October 22 work with progress through October 25. It includes physical reset/width comparison, charged-output reset, final TT temperature readings, and TG ON–OFF–ON evidence. The expanded version includes six original simulation figures: charged-output reset, TG ON/OFF markers, half-width staircase, reset threshold detail, TT temperature overlays and raw TG current. All six pages were visually checked and Word/PDF text and tables matched. No report was submitted or sent. No new simulation or circuit implementation occurred during report preparation; OFF-current validation remains deferred and thermometer construction remains unconfirmed. The experimental state below remains unchanged.
+
+Updated October 22, 2026. Read this file first, then the [Week 9 experiment log](experiments/week-09-2026-10-22.md). The October 22 resumption below supersedes the Week 8 pause; historical measurements remain unchanged.
+
+## October 22 resumption and user-reported mentor feedback
+
+The user resumed work early because of weekend travel and requested analysis before implementation. Mentor feedback, as reported by the user: characterize the TG in both ON and OFF states; consider thermometer coding or another approach if the output drop is associated with switching. Other exploration is discretionary. The meeting date was not specified.
+
+Proposed priority, not yet executed or accepted as a final implementation plan: complete nominal TG ON resistance and OFF leakage/effective resistance characterization, review the existing major-carry waveform, then compare the binary CDAC against a separate 3-bit thermometer CDAC. Preserve the six-TG MOS-reset baseline. Use matched capacitance, references, reset and timing; explicitly account for the thermometer variant's larger switch count. No new circuit, simulation or measurement is claimed. Week 8 reports stay closed; future weekly reports retain Word/PDF delivery.
 
 ## Current decision and next action
 
+Latest user decision October22: pause TG OFF-current numerical checks and return later; begin thermometer implementation. First proposed step is an independent schematic copy from cdac_3b_n65_tg_mosrst_oct17 to cdac_3b_n65_therm_mosrst_oct22. No thermometer construction is yet confirmed. Pending TG work: determine simulator mode/effective tolerances (greyed fields may be preset-controlled), then tolerance/gmin sensitivity. Existing OFF readout remains provisional.
+
+October22 latest: TG ON–OFF–ON transient markers show20.8408 kOhm at11.1 ns,6.59608 GOhm effective OFF at40.6089 ns, and20.8408 kOhm at80.6282 ns, under the intended1 mV bias near0.52 V. Both ON readings match to displayed precision. Raw /V2/PLUS current is+151.605 fA at34.6089 ns, opposite the visually negative ON current. OFF resistance is only a magnitude-based terminal-current ratio; channel leakage and numerical sensitivity remain unverified. Next inspect signed /V1/PLUS current at the same OFF time. See Week9 log. This advances the initial planning-only status above; thermometer remains unbuilt.
+
 Delivery preference: every weekly report must include both Word and a matching PDF. Week8 now includes both formats, with the five-page PDF exported from the final verified Word document.
 
-The user explicitly ended this week's work. Week 8 reporting is complete around two deliverables: (1) physical MOS reset implementation and simulations, (2) a temperature-only TT corner scan. Do not repeat the wrap-up reminder or continue experiments. The next action is the Tuesday October20 mentor discussion; further design choices await that feedback. No new mentor feedback was received during fall break.
+At the October 17 closeout, the user ended Week 8 work. Week 8 reporting is complete around two deliverables: (1) physical MOS reset implementation and simulations, (2) a temperature-only TT corner scan. The planned next action was the Tuesday October20 mentor discussion. No new mentor feedback was received during fall break; the subsequent user-reported feedback is recorded in the October 22 resumption above. Do not repeat the Week 8 wrap-up reminder.
 
 The five-page English [Week 8 weekly report](reports/weekly%20task/BiasDAC_WeeklyTask_Week08_2026-10-17.docx) preserves all five template questions, reset comparisons and four waveform figures, and adds final temperature results. It has been visually checked and has not been submitted or sent. These results can support the next Sprint4 report; no Sprint4 deadline or submission is assumed.
 

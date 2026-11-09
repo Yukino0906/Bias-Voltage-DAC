@@ -13,3 +13,5 @@ This repository is local documentation/model work. Cadence design files and simu
 Working specifications are in `docs/specs/`; provisional targets are not mentor approval. At resumption, reconcile new evidence with the state file and keep the next action precise.
 
 Weekly report delivery preference: provide both an editable Word (.docx) report and a corresponding PDF every week. Export the PDF from the final Word version, verify matching content and pagination, and link both deliverables. This preference was explicitly requested on October 17, 2026.
+
+Update November 1, 2026: while weekly work is ongoing, update only the Word report. Wait until the user explicitly says “这周任务结束” before generating/updating the corresponding final PDF. This supersedes the earlier preference to synchronize PDF on every interim edit. Retain Word plus matching PDF as the weekly closeout deliverables. Internal temporary rendering for Word QA is permitted; do not overwrite or describe the older delivered PDF as current during interim Word-only updates.

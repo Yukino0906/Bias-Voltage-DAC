@@ -1,0 +1,93 @@
+`include "constants.vams"
+`include "disciplines.vams"
+
+// Group 0 is 1Cu. Groups 1, 2 and 3 are each 2Cu.
+// round_trip=0: 0..7, reset at 350..370 ns with the default timing.
+// round_trip=1: 0..7..0; final reset is delayed until after the return scan.
+module cdac_seg21_driver(
+    en_l0, en_l0_b, en_u0, en_u0_b,
+    en_l1, en_l1_b, en_u1, en_u1_b,
+    en_l2, en_l2_b, en_u2, en_u2_b,
+    en_l3, en_l3_b, en_u3, en_u3_b,
+    rst, vss
+);
+    output en_l0, en_l0_b, en_u0, en_u0_b;
+    output en_l1, en_l1_b, en_u1, en_u1_b;
+    output en_l2, en_l2_b, en_u2, en_u2_b;
+    output en_l3, en_l3_b, en_u3, en_u3_b;
+    output rst;
+    inout vss;
+    electrical en_l0, en_l0_b, en_u0, en_u0_b;
+    electrical en_l1, en_l1_b, en_u1, en_u1_b;
+    electrical en_l2, en_l2_b, en_u2, en_u2_b;
+    electrical en_l3, en_l3_b, en_u3, en_u3_b;
+    electrical rst, vss;
+
+    parameter real vlogic = 1.0 from (0:inf);
+    parameter real t_reset = 20n from (0:inf);
+    parameter real t_apply = 30n from (0:inf);
+    parameter real t_step = 40n from (0:inf);
+    parameter real t_dead = 5n from (0:inf);
+    parameter real t_edge = 1n from (0:inf);
+    parameter integer round_trip = 0 from [0:1];
+
+    integer lower_on, upper_on, desired_upper, changed;
+    integer step_index, last_step, code, reset_on;
+
+    analog begin
+        @(initial_step) begin
+            lower_on = 15;
+            upper_on = 0;
+            desired_upper = 0;
+            step_index = 0;
+            last_step = round_trip ? 14 : 7;
+            reset_on = 1;
+            if ((t_apply <= t_reset + t_edge) || (t_dead <= t_edge) ||
+                (t_step <= t_dead + t_edge)) begin
+                $strobe("Invalid timing for reset or break-before-make.");
+                $finish;
+            end
+        end
+        @(timer(t_reset)) reset_on = 0;
+
+        @(timer(t_apply, t_step)) begin
+            if (step_index <= last_step) begin
+                code = (step_index <= 7) ? step_index : (14 - step_index);
+                desired_upper = ((((1 << (code / 2)) - 1) << 1) | (code & 1));
+                changed = upper_on ^ desired_upper;
+                lower_on = lower_on & (15 ^ changed);
+                upper_on = upper_on & (15 ^ changed);
+            end
+        end
+        @(timer(t_apply + t_dead, t_step)) begin
+            if (step_index <= last_step) begin
+                upper_on = desired_upper;
+                lower_on = 15 ^ desired_upper;
+                step_index = step_index + 1;
+            end
+        end
+        @(timer(t_apply + (round_trip ? 15 : 8) * t_step)) reset_on = 1;
+        @(timer(t_apply + (round_trip ? 15 : 8) * t_step + t_reset)) reset_on = 0;
+
+        V(en_l0, vss) <+ transition((lower_on & 1) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_l0_b, vss) <+ transition((lower_on & 1) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+        V(en_u0, vss) <+ transition((upper_on & 1) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_u0_b, vss) <+ transition((upper_on & 1) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+        V(en_l1, vss) <+ transition((lower_on & 2) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_l1_b, vss) <+ transition((lower_on & 2) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+        V(en_u1, vss) <+ transition((upper_on & 2) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_u1_b, vss) <+ transition((upper_on & 2) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+        V(en_l2, vss) <+ transition((lower_on & 4) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_l2_b, vss) <+ transition((lower_on & 4) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+        V(en_u2, vss) <+ transition((upper_on & 4) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_u2_b, vss) <+ transition((upper_on & 4) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+
+        V(en_l3, vss) <+ transition((lower_on & 8) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_l3_b, vss) <+ transition((lower_on & 8) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+        V(en_u3, vss) <+ transition((upper_on & 8) ? vlogic : 0.0, 0.0, t_edge, t_edge);
+        V(en_u3_b, vss) <+ transition((upper_on & 8) ? 0.0 : vlogic, 0.0, t_edge, t_edge);
+        V(rst, vss) <+ transition(reset_on ? vlogic : 0.0, 0.0, t_edge, t_edge);
+    end
+endmodule
